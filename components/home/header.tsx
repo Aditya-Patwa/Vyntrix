@@ -6,7 +6,7 @@ export default function Header() {
         <header className="max-w-7xl w-full p-4 md:py-4 md:px-8 justify-self-center flex items-center justify-between">
             <div>
                 <Link href={"/"}>
-                    <h1 className="text-xl font-semibold tracking-tight leading-none">
+                    <h1 className="text-2xl font-semibold tracking-tight leading-none">
                         VYNTRIX
                     </h1>
                 </Link>
@@ -20,7 +20,7 @@ export default function Header() {
                 </Link>
                 <Link href={"/"}>
                     <Button variant={"link"} className="cursor-pointer">
-                        Pricing
+                        Contact
                     </Button>
                 </Link>
                 <Link href={"/"}>
@@ -32,8 +32,8 @@ export default function Header() {
 
             <div>
                 <Link href={"/"}>
-                    <Button variant={"secondary"} className="cursor-pointer">
-                        Connect Wallet
+                    <Button className="cursor-pointer">
+                        Join Waitlist
                     </Button>
                 </Link>
             </div>
