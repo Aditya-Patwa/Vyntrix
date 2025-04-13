@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 
 export default function Header() {
     return (
-        <header className="max-w-7xl w-full p-4 md:py-4 md:px-8 justify-self-center flex items-center justify-between">
+        <header className="max-w-7xl w-full p-4 md:py-4 md:px-8 justify-self-center flex items-center justify-between xl:border-x border-dashed">
             <div>
                 <Link href={"/"}>
                     <h1 className="text-2xl font-semibold tracking-tight leading-none">
@@ -14,17 +14,17 @@ export default function Header() {
 
             <div className="hidden md:flex items-center gap-2">
                 <Link href={"/"}>
-                    <Button variant={"link"} className="cursor-pointer">
+                    <Button variant={"ghost"} className="cursor-pointer">
                         Features
                     </Button>
                 </Link>
                 <Link href={"/"}>
-                    <Button variant={"link"} className="cursor-pointer">
+                    <Button variant={"ghost"} className="cursor-pointer">
                         Contact
                     </Button>
                 </Link>
                 <Link href={"/"}>
-                    <Button variant={"link"} className="cursor-pointer">
+                    <Button variant={"ghost"} className="cursor-pointer">
                         FAQ
                     </Button>
                 </Link>
@@ -32,7 +32,7 @@ export default function Header() {
 
             <div>
                 <Link href={"/"}>
-                    <Button className="cursor-pointer">
+                    <Button variant={"secondary"} className="cursor-pointer">
                         Join Waitlist
                     </Button>
                 </Link>
