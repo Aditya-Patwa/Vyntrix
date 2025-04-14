@@ -14,7 +14,7 @@ export default function Header() {
             </div>
 
             <div className="hidden md:flex items-center gap-2">
-                <Link href={"/"}>
+                <Link href={"/#features"}>
                     <Button variant={"ghost"} className="cursor-pointer">
                         Features
                     </Button>
@@ -32,7 +32,7 @@ export default function Header() {
             </div>
 
             <div className="flex gap-1">
-                <Link href={"/"}>
+                <Link href={"/#cta"}>
                     <Button variant={"secondary"} className="cursor-pointer">
                         Join Waitlist
                     </Button>

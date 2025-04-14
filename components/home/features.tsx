@@ -4,7 +4,7 @@ import { Badge } from "../ui/badge";
 
 export default function Features() {
     return (
-        <section className="w-full grid border-b border-dashed px-4">
+        <section className="w-full grid border-b border-dashed px-4" id="features">
             <section className="max-w-6xl w-full justify-self-center grid gap-4 border-x border-dashed">
                 <div className="border-b border-dashed w-full text-center grid px-4 md:px-8 py-8 md:py-10 relative bg-gradient-to-bl from-rose-800 to-indigo-800">
                     <div className="absolute w-full h-full top-0 left-0 bg-[url('/metal.png')] mix-blend-overlay"></div>

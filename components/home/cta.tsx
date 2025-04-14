@@ -3,7 +3,7 @@ import { Input } from "../ui/input";
 
 export default function CTA() {
     return (
-        <section className="w-full grid border-b border-dashed px-4">
+        <section className="w-full grid border-b border-dashed px-4" id="cta">
             <section className="max-w-6xl w-full justify-self-center px-4 md:px-8 py-12 md:py-16 grid gap-6 border-x border-dashed relative">
                 <div className="absolute w-full h-full left-0 h-0 bg-[url('/metal.png')] mix-blend-overlay"></div>
                 <div className="grid gap-2 z-20 text-center">

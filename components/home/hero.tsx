@@ -19,12 +19,12 @@ export default function Hero() {
                         </p>
                     </div>
                     <div className="flex gap-2">
-                        <Link href={"/"}>
+                        <Link href={"/#cta"}>
                             <Button className="cursor-pointer">
                                 Join Waitlist
                             </Button>
                         </Link>
-                        <Link href={"/"}>
+                        <Link href={"/#features"}>
                             <Button variant={"link"} className="group cursor-pointer">
                                 Learn more
                                 <ChevronRight className="group-hover:translate-x-1 transition-ease duration-100" />
