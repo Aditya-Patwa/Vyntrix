@@ -1,3 +1,4 @@
+import CTA from "@/components/home/cta";
 import Features from "@/components/home/features";
 import Header from "@/components/home/header";
 import Hero from "@/components/home/hero";
@@ -11,6 +12,7 @@ export default function Home() {
 
       <Hero />
       <Features />
+      <CTA />
     </main>
   )
 }
