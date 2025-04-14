@@ -1,4 +1,4 @@
-import { CloudUpload, LayoutDashboard, MousePointerClick, Table2, Wallet } from "lucide-react";
+import { CloudUpload, LayoutDashboard, MousePointerClick, Rocket, Table2, Users, Wallet } from "lucide-react";
 import { Badge } from "../ui/badge";
 
 export default function Features() {
@@ -46,12 +46,20 @@ export default function Features() {
                             Just define your data structure.  <span className="text-muted-foreground">Vyntrix transforms it into smart contracts.</span>
                         </h1>
                     </div>
-                    <div className="px-4 py-8 md:p-8 space-y-4">
+                    <div className="px-4 py-8 md:p-8 space-y-4 border-b border-dashed">
                         <Badge variant={"secondary"}>
                             <Wallet /> Accept payments
                         </Badge>
                         <h1 className="text-2xl md:text-2xl lg:text-3xl max-w-md font-medium tracking-tight">
                             Launch monetized apps  <span className="text-muted-foreground">faster with built-in Solana Pay tools.</span>
+                        </h1>
+                    </div>
+                </div>
+
+                <div className="border-t border-dashed w-full text-center grid px-4 md:px-8 py-12 md:py-16">
+                    <div className="max-w-xl w-full justify-self-center text-center">
+                        <h1 className="text-2xl md:text-3xl font-semibold tracking-tight">
+                            Manage users, notify on-chain, accept payments — launch without limits.
                         </h1>
                     </div>
                 </div>
