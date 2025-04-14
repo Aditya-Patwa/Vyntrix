@@ -19,7 +19,7 @@ export default function Header() {
                         Features
                     </Button>
                 </Link>
-                <Link href={"/"}>
+                <Link href={"mailto:vyntrixhq@gmail.com"}>
                     <Button variant={"ghost"} className="cursor-pointer">
                         Contact
                     </Button>
