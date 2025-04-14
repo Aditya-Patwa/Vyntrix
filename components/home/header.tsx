@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { ModeToggle } from "../ModeToggle";
 
 export default function Header() {
     return (
@@ -30,12 +31,13 @@ export default function Header() {
                 </Link>
             </div>
 
-            <div>
+            <div className="flex gap-1">
                 <Link href={"/"}>
                     <Button variant={"secondary"} className="cursor-pointer">
                         Join Waitlist
                     </Button>
                 </Link>
+                <ModeToggle />
             </div>
         </header>
     )
