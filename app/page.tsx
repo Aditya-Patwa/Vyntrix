@@ -2,6 +2,7 @@ import CTA from "@/components/home/cta";
 import Features from "@/components/home/features";
 import Header from "@/components/home/header";
 import Hero from "@/components/home/hero";
+import Workflow from "@/components/home/workflow";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
 
       <Hero />
       <Features />
+      <Workflow />
       <CTA />
     </main>
   )
