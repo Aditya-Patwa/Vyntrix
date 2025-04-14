@@ -14,13 +14,13 @@ export default function Hero() {
                         <h1 className="max-w-xl text-3xl md:text-3xl font-semibold tracking-tight leading-none">
                             Your No-Code & Low-Code Platform to Build Smart Contracts on Solana.
                         </h1>
-                        <p className="max-w-2xl font-light text-base">
+                        <p className="max-w-2xl font-light text-sm sm:text-base">
                             From contract creation to real-time backend, user auth, and payment integration — Vyntrix is the Solana dev stack reimagined.
                         </p>
                     </div>
                     <div className="flex gap-2">
                         <Link href={"/"}>
-                            <Button>
+                            <Button className="cursor-pointer">
                                 Join Waitlist
                             </Button>
                         </Link>
