@@ -1,6 +1,7 @@
 import { CloudUpload, LayoutDashboard, MousePointerClick, Table2, Wallet } from "lucide-react";
 import { Badge } from "../ui/badge";
 
+
 export default function Features() {
     return (
         <section className="w-full grid border-b border-dashed px-4">
