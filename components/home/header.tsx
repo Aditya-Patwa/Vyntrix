@@ -4,7 +4,7 @@ import { ModeToggle } from "../ModeToggle";
 
 export default function Header() {
     return (
-        <header className="max-w-7xl w-full p-4 md:py-4 md:px-8 justify-self-center flex items-center justify-between xl:border-x border-dashed">
+        <header className="max-w-7xl w-full p-4 md:py-4 md:px-8 justify-self-center flex items-center justify-between">
             <div>
                 <Link href={"/"}>
                     <h1 className="text-2xl font-semibold tracking-tight leading-none">
