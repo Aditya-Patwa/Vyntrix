@@ -31,6 +31,16 @@ export default function Hero() {
                             </Button>
                         </Link>
                     </div>
+
+                    <div className="flex gap-2 items-center py-1">
+                        <span className="text-sm font-medium">
+                            Powered by
+                        </span>
+                        <div className="flex gap-1.5 items-center">
+                            <img src="/solanaLogoMark.png" alt="Solana Logo" className="h-4" />
+                            <img src="/solanaWordMark.png" alt="Solana Logo" className="h-3 invert dark:invert-0" />
+                        </div>
+                    </div>
                 </div>
             </section>
         </section>
