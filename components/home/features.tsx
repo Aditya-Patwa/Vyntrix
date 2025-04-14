@@ -1,4 +1,4 @@
-import { CloudUpload, LayoutDashboard, MousePointerClick, Rocket, Table2, Users, Wallet } from "lucide-react";
+import { CloudUpload, LayoutDashboard, MousePointerClick, Table2, Wallet } from "lucide-react";
 import { Badge } from "../ui/badge";
 
 export default function Features() {
