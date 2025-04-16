@@ -48,7 +48,7 @@ export default function Footer() {
 
       <div className="max-w-7xl justify-self-center w-full mt-10 border-t border-dashed pt-6 text-sm flex justify-between items-center sm:px-4">
         <div className="text-muted-foreground">
-          &copy; {new Date().getFullYear()}All rights reserved.
+          &copy; {new Date().getFullYear()} {" "} All rights reserved.
         </div>
 
         <div className="flex gap-6">
