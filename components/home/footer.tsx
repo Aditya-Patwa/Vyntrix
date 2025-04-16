@@ -14,7 +14,7 @@ export default function Footer() {
 
         <div className="md:w-1/3 flex flex-col md:flex-row justify-between gap-8 md:px-4">
           <div>
-            <h3 className="text-lg font-semibold mb-3">Company</h3>
+            <h3 className="text-lg font-semibold mb-3 text-muted-foreground">Company</h3>
             <ul className="space-y-2 text-sm">
 
               <li><a href="/about" className="hover:underline">About Us</a></li>
@@ -23,7 +23,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-3">Support</h3>
+            <h3 className="text-lg font-semibold mb-3 text-muted-foreground">Support</h3>
             <ul className="space-y-2 text-sm">
               <li><a href="/contact" className="hover:underline">Contact Us</a></li>
               <li><a href="/faq" className="hover:underline">FAQs</a></li>
