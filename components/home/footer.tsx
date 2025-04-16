@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className=" px-6 py-10">
+    <footer className="px-6 py-10">
       <div className="max-w-7xl w-full mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
         <div className="md:w-1/3">
           <h2 className="text-xl font-semibold mb-4">VYNTRIX</h2>
@@ -46,7 +46,7 @@ export default function Footer() {
         </div> */}
       </div>
 
-      <div className="max-w-7xl justify-self-center w-full mt-10 border-t border-dashed pt-6 text-sm flex justify-between items-center">
+      <div className="max-w-7xl justify-self-center w-full mt-10 border-t border-dashed pt-6 text-sm flex justify-between items-center sm:px-4">
         <div className="text-muted-foreground">
           &copy; {new Date().getFullYear()}All rights reserved.
         </div>
