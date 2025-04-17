@@ -159,9 +159,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
                             <div className="flex gap-0 items-center">
-                                <Image src={"/UnifiedBot.png"} width={32} height={32} alt="UnifiedBots Logo" className="rounded dark:invert" />
                                 <Link href={"/"} className="text-lg font-semibold tracking-tight leading-none mt-1.5">
-                                    UnifiedBot
+                                    VYNTRIX
                                 </Link>
                             </div>
                         </SidebarMenuButton>
