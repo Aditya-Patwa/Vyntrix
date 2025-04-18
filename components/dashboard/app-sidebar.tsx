@@ -4,6 +4,7 @@ import type * as React from "react"
 // import Image from "next/image"
 import {
     BarChartIcon,
+    Blocks,
     BookMarked,
     CameraIcon,
     ClipboardListIcon,
@@ -14,7 +15,9 @@ import {
     FolderOpen,
     HelpCircleIcon,
     LayoutDashboardIcon,
+    Package,
     SearchIcon,
+    Settings2,
     SettingsIcon,
     Table2,
 } from "lucide-react"
@@ -156,6 +159,21 @@ const data = {
             title: "Table Editor",
             url: "#",
             icon: Table2
+        },
+        {
+            title: "Storage",
+            url: "#",
+            icon: Package
+        },
+        {
+            title: "Integrations",
+            url: "#",
+            icon: Blocks
+        },
+        {
+            title: "Project Settings",
+            url: "#",
+            icon: Settings2
         }
     ]
 }
@@ -164,7 +182,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     const pathname = usePathname();
 
     // Check if route is inside /dashboard/project/*
-    const isProjectRoute = pathname.startsWith('/dashboard/project');
+    const isProjectRoute = true || pathname.startsWith('/dashboard/project');
 
     return (
         <Sidebar collapsible="offcanvas" {...props}>
@@ -172,8 +190,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
-                            <div className="flex gap-0 items-center">
-                                <Link href={"/"} className="text-lg font-semibold tracking-tight leading-none mt-1.5">
+                            <div className="flex gap-0 items-center mt-1.5">
+                                <Link href={"/"} className="text-lg font-semibold tracking-tight leading-none">
                                     VYNTRIX
                                 </Link>
                             </div>
