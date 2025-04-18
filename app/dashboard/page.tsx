@@ -2,8 +2,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { ChevronRight } from "lucide-react";
-import Link from "next/link";
+import { ChevronRight, Filter } from "lucide-react";
+// import Link from "next/link";
 
 
 function ProjectCard() {
@@ -51,13 +51,16 @@ export default function DashboardPage() {
   return (
     <main className="grid">
       <div className="p-4 border-b border-dashed flex items-center gap-2">
-        <Link href={"/"}>
+        {/* <Link href={"/"}>
           <Button>
             New Project
           </Button>
-        </Link>
+        </Link> */}
 
         <Input type="text" placeholder="Search for a project" className="w-full max-w-sm text-xs" />
+        <Button variant={"outline"} className="cursor-pointer border-dashed">
+          <Filter className="size-4" />
+        </Button>
       </div>
       <ProjectSection />
     </main>
