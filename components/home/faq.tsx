@@ -4,18 +4,18 @@ import { faqs } from "./data";
 
 export default function FAQ() {
     return (
-        <section className="w-full grid border-b border-dashed px-4" id="workflow">
+        <section className="w-full grid border-b border-dashed px-4" id="faq">
             <section className="max-w-6xl w-full justify-self-center grid gap-4 border-x border-dashed grid grid-cols-1 md:grid-cols-2 divide-y md:divide-x divide-dashed">
                 <div className="space-y-2 px-4 md:px-8 py-8 md:py-16 border-b border-dashed">
                     <h1 className="text-2xl md:text-3xl font-semibold tracking-tight leading-none">
                         Frequently Asked Questions
                     </h1>
                     <p className="text-muted-foreground">
-                        Have another question? Contact me on <span><Link href={"https://x.com/VyntrixHQ"} target="_blank" className="text-foreground underline">X</Link></span> or by <span><Link href={"mailto:vyntrixhq@gmail.com"} className="text-foreground underline">email</Link></span>.
+                        Have another question? Contact us on <span><Link href={"https://x.com/VyntrixHQ"} target="_blank" className="text-foreground underline">X</Link></span> or by <span><Link href={"mailto:vyntrixhq@gmail.com"} className="text-foreground underline">email</Link></span>.
                     </p>
                 </div>
 
-                <div className="grid divide-y divide-dashed border-t border-dashed md:border-x">
+                <div className="grid divide-y divide-dashed border-t border-dashed md:border-x pb-4">
                     {faqs.map((faq, i) => 
                         <Accordion key={i} question={faq.question} answer={faq.answer} isAccordionOpen={faq.isAccordionOpen} />
                     )}

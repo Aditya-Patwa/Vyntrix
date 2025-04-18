@@ -1,11 +1,18 @@
+import { Plus } from "lucide-react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
 export default function CTA() {
     return (
         <section className="w-full grid border-b border-dashed px-4" id="cta">
-            <section className="max-w-6xl w-full justify-self-center px-4 md:px-8 py-12 md:py-16 grid gap-6 border-x border-dashed relative">
+            <section className="max-w-6xl w-full justify-self-center bg-background px-4 md:px-8 py-12 md:py-16 grid gap-6 border border-dashed relative">
                 <div className="absolute w-full h-full left-0 h-0 bg-[url('/metal.png')] mix-blend-overlay"></div>
+                <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2">
+                    <Plus className="size-6 stroke-1" />
+                </div>
+                <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2">
+                    <Plus className="size-6 stroke-1" />
+                </div>
                 <div className="grid gap-2 z-20 text-center">
                     <h1 className="max-w-md justify-self-center text-3xl md:text-3xl font-semibold tracking-tight leading-none z-10">
                         Join Vyntrix Early.

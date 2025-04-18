@@ -4,19 +4,18 @@ import type * as React from "react"
 // import Image from "next/image"
 import {
     BarChartIcon,
-    Bot,
+    BookMarked,
     CameraIcon,
     ClipboardListIcon,
     DatabaseIcon,
     FileCodeIcon,
     FileIcon,
     FileTextIcon,
-    FolderIcon,
+    FolderOpen,
     HelpCircleIcon,
     LayoutDashboardIcon,
     SearchIcon,
     SettingsIcon,
-    UsersIcon,
 } from "lucide-react"
 
 // import { NavDocuments } from "./nav-documents"
@@ -47,9 +46,9 @@ const data = {
             icon: LayoutDashboardIcon,
         },
         {
-            title: "Chatbots",
+            title: "All Projects",
             url: "#",
-            icon: Bot,
+            icon: FolderOpen,
         },
         {
             title: "Analytics",
@@ -57,14 +56,9 @@ const data = {
             icon: BarChartIcon,
         },
         {
-            title: "Projects",
+            title: "Guide",
             url: "#",
-            icon: FolderIcon,
-        },
-        {
-            title: "Team",
-            url: "#",
-            icon: UsersIcon,
+            icon: BookMarked,
         },
     ],
     navClouds: [
@@ -123,7 +117,7 @@ const data = {
         },
         {
             title: "Get Help",
-            url: "#",
+            url: "mailto:vyntrixhq@gmail.com",
             icon: HelpCircleIcon,
         },
         {

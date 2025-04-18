@@ -24,7 +24,7 @@ export default function Header() {
                         Contact
                     </Button>
                 </Link>
-                <Link href={"/"}>
+                <Link href={"/#faq"}>
                     <Button variant={"ghost"} className="cursor-pointer">
                         FAQ
                     </Button>
