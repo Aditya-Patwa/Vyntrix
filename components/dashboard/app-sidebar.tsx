@@ -1,7 +1,7 @@
 "use client"
 
 import type * as React from "react"
-import Image from "next/image"
+// import Image from "next/image"
 import {
     BarChartIcon,
     Bot,
