@@ -16,6 +16,7 @@ import {
     LayoutDashboardIcon,
     SearchIcon,
     SettingsIcon,
+    Table2,
 } from "lucide-react"
 
 // import { NavDocuments } from "./nav-documents"
@@ -32,6 +33,7 @@ import {
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 const data = {
     user: {
@@ -143,9 +145,27 @@ const data = {
             icon: FileIcon,
         },
     ],
+
+    navProjects: [
+        {
+            title: "Project Overview",
+            url: "#",
+            icon: LayoutDashboardIcon,
+        },
+        {
+            title: "Table Editor",
+            url: "#",
+            icon: Table2
+        }
+    ]
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+    const pathname = usePathname();
+
+    // Check if route is inside /dashboard/project/*
+    const isProjectRoute = pathname.startsWith('/dashboard/project');
+
     return (
         <Sidebar collapsible="offcanvas" {...props}>
             <SidebarHeader>
@@ -162,7 +182,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 </SidebarMenu>
             </SidebarHeader>
             <SidebarContent>
-                <NavMain items={data.navMain} />
+                <NavMain items={(!isProjectRoute ? data.navMain : data.navProjects)} isProjectRoute={isProjectRoute} />
                 {/* <NavDocuments items={data.documents} /> */}
                 <NavSecondary items={data.navSecondary} className="mt-auto" />
             </SidebarContent>
