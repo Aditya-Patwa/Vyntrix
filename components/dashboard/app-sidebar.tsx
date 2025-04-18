@@ -182,7 +182,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     const pathname = usePathname();
 
     // Check if route is inside /dashboard/project/*
-    const isProjectRoute = true || pathname.startsWith('/dashboard/project');
+    const isProjectRoute = pathname.startsWith('/dashboard/project');
 
     return (
         <Sidebar collapsible="offcanvas" {...props}>
