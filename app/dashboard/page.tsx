@@ -33,7 +33,7 @@ function ProjectSection() {
     <section className="p-4 py-6 grid gap-6">
       <div className="grid gap-2">
         <h1 className="text-2xl font-semibold tracking-tight leading-none">
-          Aditya-Patwa's Org
+          Aditya-Patwa&apos;s Org
         </h1>
       </div>
 
