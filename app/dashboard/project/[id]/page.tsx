@@ -68,7 +68,7 @@ const products = [
 
 function OtherProducts() {
     return (
-        <section className="bg-zinc-100 dark:bg-zinc-900 w-full border-b border-dashed px-4 py-6 md:px-6 md:py-8 grid gap-6">
+        <section className="bg-zinc-50 dark:bg-zinc-950 w-full border-b border-dashed px-4 py-6 md:px-6 md:py-8 grid gap-6">
             <div className="grid gap-2 max-w-xl w-full">
                 <h1 className="text-xl font-semibold tracking-tight leading-none">
                     Explore our other products
@@ -90,7 +90,8 @@ function OtherProducts() {
 
 
 export default async function ProjectPage({ params }: { params: Promise<{ id: string }> }) {
-    const { id } = await params
+    const { id } = await params;
+    console.log(id);
 
     return (
         <main className="grid">
