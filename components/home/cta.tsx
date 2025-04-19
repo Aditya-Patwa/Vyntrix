@@ -1,8 +1,35 @@
-import { Plus } from "lucide-react";
+"use client";
+import { Loader2, Plus } from "lucide-react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import { toast } from "sonner";
+import React from "react";
 
 export default function CTA() {
+    const [isSubmitting, setSubmitting] = React.useState(false);
+    const [email, setEmail] = React.useState("");
+
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        try {
+            setSubmitting(true);
+            const res = await fetch("/api/join-waitlist", { body: JSON.stringify({ email: email }), method: "POST" });
+            if (res.status === 200) {
+                toast.success("Email added to waitlist");
+            } else if (res.status === 400) {
+                toast.error("Email is required");
+            } else {
+                toast.error("Something went wrong. Please try again later.");
+            }
+        } catch (error) {
+            console.log("Error Occured: ", error);
+            toast.error("Something went wrong. Please try again later.");
+        } finally {
+            setEmail("");
+            setSubmitting(false);
+        }
+    }
+
     return (
         <section className="w-full grid border-b border-dashed px-4" id="cta">
             <section className="max-w-6xl w-full justify-self-center bg-background px-4 md:px-8 py-12 md:py-16 grid gap-6 border border-dashed relative">
@@ -22,10 +49,10 @@ export default function CTA() {
                     </p>
                 </div>
                 <div className="grid z-20">
-                    <form className="grid sm:flex gap-2 items-center justify-self-center">
-                        <Input type="email" placeholder="Enter your email" className="w-full max-w-md" />
-                        <Button type="submit" className="cursor-pointer">
-                            Join Waitlist
+                    <form className="grid sm:flex gap-2 items-center justify-self-center" onSubmit={handleSubmit}>
+                        <Input type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full max-w-md" />
+                        <Button type="submit" className="cursor-pointer" disabled={isSubmitting}>
+                            {isSubmitting ? <Loader2 className="animate-spin" /> : "Join Waitlist"}
                         </Button>
                     </form>
                 </div>
