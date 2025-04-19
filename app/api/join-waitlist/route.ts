@@ -19,6 +19,7 @@ export async function POST(request: Request) {
         // }
         return Response.json({ message: "Email added to waitlist" }, { status: 200 });
     } catch (e) {
+        console.log(e);
         return Response.json({ error: "Error inserting email" }, { status: 500 });
     }
     
