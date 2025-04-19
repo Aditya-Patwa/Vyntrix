@@ -5,6 +5,7 @@ import { faqs } from "./data";
 export default function FAQ() {
     return (
         <section className="w-full grid border-b border-dashed px-4" id="faq">
+            <div className="w-full py-2 bg-muted max-w-6xl w-full justify-self-center"></div>
             <section className="max-w-6xl w-full justify-self-center grid gap-4 border-x border-dashed grid grid-cols-1 md:grid-cols-2 divide-y md:divide-x divide-dashed">
                 <div className="space-y-2 px-4 md:px-8 py-8 md:py-16 border-b border-dashed">
                     <h1 className="text-2xl md:text-3xl font-semibold tracking-tight leading-none">
@@ -15,7 +16,7 @@ export default function FAQ() {
                     </p>
                 </div>
 
-                <div className="grid divide-y divide-dashed border-t border-dashed md:border-x pb-4">
+                <div className="grid divide-y divide-dashed border-t border-dashed md:border-x py-4">
                     {faqs.map((faq, i) => 
                         <Accordion key={i} question={faq.question} answer={faq.answer} isAccordionOpen={faq.isAccordionOpen} />
                     )}

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import Image from "next/image";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+import { Minus, Plus } from "lucide-react";
 
 type Props = {
   isAccordionOpen?: boolean;
@@ -28,21 +28,9 @@ export default function Accordion(props: Props) {
       >
         <span>{props.question}</span>
         {isAccordionOpen ? (
-          <Image
-            src="/icon-minus.svg"
-            alt="minus-icon"
-            width={24} 
-            height={24} 
-            className="h-6 w-auto"
-          />
+          <Minus />
         ) : (
-          <Image
-            src="/icon-plus.svg"
-            alt="plus-icon"
-            width={24} 
-            height={24} 
-            className="h-6 w-auto"
-          />
+          <Plus />
         )}
       </p>
       {/* Answer */}

@@ -1,8 +1,9 @@
 export default function Workflow() {
     return (
         <section className="w-full grid border-b border-dashed px-4" id="workflow">
+            <div className="w-full py-2 bg-muted max-w-6xl w-full justify-self-center"></div>
             <section className="max-w-6xl w-full justify-self-center grid gap-4 border-x border-dashed grid grid-cols-1 md:grid-cols-2 divide-y md:divide-x divide-dashed">
-                <div className="space-y-2 px-4 md:px-8 py-8 md:py-16 border-b border-dashed">
+                <div className="space-y-2 px-4 md:px-8 py-12 md:py-16 border-b border-dashed">
                     <h1 className="text-2xl md:text-3xl font-semibold tracking-tight leading-none">
                         From Idea to On-Chain in Minutes
                     </h1>
@@ -11,7 +12,7 @@ export default function Workflow() {
                     </p>
                 </div>
 
-                <div className="grid divide-y divide-dashed border-t border-dashed md:border-x">
+                <div className="grid divide-y divide-dashed border-t border-dashed md:border-x py-4">
                     <div className="p-4 md:p-8 grid gap-2">
                         <h1 className="text-lg md:text-xl font-semibold tracking-tight leading-none">
                             1. Define Your Logic
