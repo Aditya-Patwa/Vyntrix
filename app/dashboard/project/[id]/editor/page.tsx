@@ -156,7 +156,7 @@ function NewTable() {
 
 
 
-export function SelectTable() {
+function SelectTable() {
     return (
         <Select>
             <SelectTrigger className="min-w-[180px]">
