@@ -152,17 +152,17 @@ const data = {
     navProjects: [
         {
             title: "Project Overview",
-            url: "#",
+            url: "overview/",
             icon: LayoutDashboardIcon,
         },
         {
             title: "Table Editor",
-            url: "#",
+            url: "editor/",
             icon: Table2
         },
         {
             title: "Storage",
-            url: "#",
+            url: "storage/",
             icon: Package
         },
         {

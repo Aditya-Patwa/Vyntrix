@@ -104,7 +104,7 @@ function NewTable() {
     return (
         <Sheet>
             <SheetTrigger asChild>
-                <Button className="flex gap-1">
+                <Button className="flex gap-1" variant={"outline"}>
                     <Plus /> New Table
                 </Button>
             </SheetTrigger>
