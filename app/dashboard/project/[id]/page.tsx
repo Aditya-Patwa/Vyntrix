@@ -68,7 +68,7 @@ const products = [
 
 function OtherProducts() {
     return (
-        <section className="bg-zinc-50 dark:bg-zinc-950 w-full border-b border-dashed px-4 py-6 md:px-6 md:py-8 grid gap-6">
+        <section className="bg-neutral-50 dark:bg-neutral-950 w-full border-b border-dashed px-4 py-6 md:px-6 md:py-8 grid gap-6">
             <div className="grid gap-2 max-w-xl w-full">
                 <h1 className="text-xl font-semibold tracking-tight leading-none">
                     Explore our other products
