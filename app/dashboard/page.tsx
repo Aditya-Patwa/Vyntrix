@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ChevronRight, Filter } from "lucide-react";
+import Link from "next/link";
 // import Link from "next/link";
 
 
@@ -38,7 +39,9 @@ function ProjectSection() {
       </div>
 
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-        <ProjectCard />
+        <Link href={"/dashboard/project/1/overview"}>
+          <ProjectCard />
+        </Link>
         {/* <Card className="border-dashed bg-background">
           <CardHeader className="text-center">
             <CardTitle>New Project</CardTitle>

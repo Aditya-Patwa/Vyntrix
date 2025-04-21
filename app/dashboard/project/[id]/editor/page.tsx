@@ -204,17 +204,17 @@ export default async function Editor() {
             <section className="w-full h-full grid">
                 <Card className="max-w-xs md:max-w-sm w-full justify-self-center my-12 mx-8">
                     <CardHeader>
-                        <CardTitle>
+                        <CardTitle className="text-lg">
                             Table Editor
                         </CardTitle>
-                        <CardDescription>
-                            Select a table from dropdown to view its data.
+                        <CardDescription className="text-base">
+                            Select a table from dropdown to view its data or create a new table.
                         </CardDescription>
                     </CardHeader>
 
-                    <CardContent>
+                    {/* <CardContent>
                         <SelectTable />
-                    </CardContent>
+                    </CardContent> */}
                 </Card>
             </section>
         </main>
