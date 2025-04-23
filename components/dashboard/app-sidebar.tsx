@@ -167,7 +167,7 @@ const data = {
         },
         {
             title: "Integrations",
-            url: "#",
+            url: "integrations/",
             icon: Blocks
         },
         {

@@ -66,7 +66,7 @@ const products = [
 
 
 
-function OtherProducts() {
+export function OtherProducts() {
     return (
         <section className="bg-neutral-50 dark:bg-neutral-950 w-full border-b border-dashed px-4 py-6 md:px-6 md:py-8 grid gap-6">
             <div className="grid gap-2 max-w-xl w-full">
