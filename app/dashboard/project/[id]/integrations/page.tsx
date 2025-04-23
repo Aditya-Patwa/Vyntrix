@@ -1,5 +1,3 @@
-import { OtherProducts } from "../overview/page";
-
 export default function Integrations() {
     return (
         <main className="grid">
@@ -8,7 +6,6 @@ export default function Integrations() {
                     Integrations
                 </h1>
             </div>
-            <OtherProducts />
         </main>
     )
 }
