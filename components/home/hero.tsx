@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, MousePointerClick } from "lucide-react";
 import Link from "next/link";
 
 
@@ -19,14 +19,17 @@ export default function Hero() {
                         </p>
                     </div>
                     <div className="flex gap-2">
-                        <Link href={"/#cta"}>
-                            <Button className="cursor-pointer">
-                                Join Waitlist
+                        <Link href={"/try"}>
+                            <Button className="font-semibold cursor-pointer">
+                                Try Vyntrix Now
+                                <span>
+                                    <MousePointerClick />
+                                </span>
                             </Button>
                         </Link>
                         <Link href={"/#features"}>
                             <Button variant={"link"} className="group cursor-pointer">
-                                Learn more
+                                Join Waitlist
                                 <ChevronRight className="group-hover:translate-x-1 transition-ease duration-100" />
                             </Button>
                         </Link>
