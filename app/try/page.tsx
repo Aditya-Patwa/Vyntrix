@@ -14,18 +14,17 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import { Pencil, Sidebar, Table2, Zap } from "lucide-react"
+import { Pencil, Trash2Icon, Zap } from "lucide-react"
 import Link from "next/link"
 import { Dispatch, SetStateAction, useState } from "react";
+import { ITable } from "@/components/editor/TableTypes";
 
 
-
-
-function ProjectName({projectName, setProjectName}:{projectName: string, setProjectName: Dispatch<SetStateAction<string>>;}) {
-    return(
+function ProjectName({ projectName, setProjectName }: { projectName: string, setProjectName: Dispatch<SetStateAction<string>>; }) {
+    return (
         <Dialog defaultOpen={true}>
             <DialogTrigger asChild>
-                <Button variant="outline">{projectName} <span><Pencil /></span></Button>
+                <Button variant="link">{projectName} <span><Pencil className="size-4" /></span></Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
@@ -78,42 +77,135 @@ function Header() {
 
 
 
-function SideBar() {
-    return (
-        <div className="p-2 md:p-4 border-r border-dashed flex flex-col gap-12">
-            <div>
-                <Button size={"icon"} className="cursor-pointer" variant={"ghost"}>
-                    <Sidebar />
-                </Button>
-            </div>
+// function SideBar() {
+//     const [isOpen, setIsOpen] = useState(false);
 
-            <div className="grid gap-4">
-                <NewTable />
+//     return (
+//         <div className="p-2 md:p-4 border-r border-dashed flex flex-col gap-12">
+//             <div>
+//                 <Button size={"icon"} className="cursor-pointer" variant={"ghost"} onClick={() => setIsOpen(!isOpen)}>
+//                     <Sidebar />
+//                 </Button>
+//             </div>
 
-                <Button variant={"ghost"} size={"icon"}>
-                    <Table2 />
-                </Button>
-            </div>
-        </div>
-    )
-}
+//             <div className="grid gap-4">
+//                 <NewTable  />
+
+//                 {isOpen ? (
+//                     <div className="grid gap-2 pt-2 min-w-[160px]">
+//                         <div>
+//                             <h1 className="text-xs font-semibold text-muted-foreground">
+//                                 Tables
+//                             </h1>
+//                         </div>
+//                         <div className="grid gap-1">
+//                             <div className="flex">
+//                                 <Button variant={"ghost"} className="flex-grow">
+//                                     Profile
+//                                 </Button>
+//                             </div>
+//                         </div>
+//                     </div>
+//                 ) : (
+//                     <Button variant={"ghost"} size={"icon"} onClick={() => setIsOpen(!isOpen)}>
+//                         <Table2 />
+//                     </Button>
+//                 )}
+//             </div>
+//         </div >
+//     )
+// }
 
 export default function Try() {
     const [projectName, setProjectName] = useState("MyVyntrixProject");
+    const [tables, setTables] = useState<ITable[]>([]);
+    const [currentTable, setCurrentTable] = useState<ITable | null>(null);
+
+
+    function removeTable(id: string) {
+        const filteredTables = tables.filter((t) => t.id == id);
+        setTables([...filteredTables]);
+    }
 
     return (
-        <main className="w-full h-screen flex flex-col">
+        <main className="w-full h-screen">
             <Header />
-            <div className="grid w-full h-full">
-                <section className="w-full flex h-full">
-                    <SideBar />
-                    <div className="w-full h-full grid p-4">
-                        <section className="max-w-7xl w-full justify-self-center">
-                            <ProjectName projectName={projectName} setProjectName={setProjectName} />
-                        </section>
+            <section className="max-w-7xl p-4 w-full justify-self-center">
+                <div className="flex gap-4 items-center justify-end">
+                    <ProjectName projectName={projectName} setProjectName={setProjectName} />
+                    <NewTable tables={tables} setCurrentTable={setCurrentTable} setTables={setTables} />
+                </div>
+
+                {tables.length <= 0 ? (
+                    <div className="max-w-3xl w-full justify-self-center grid w-full py-16 gap-4">
+                        <div className="grid gap-2">
+                            <h1 className="max-w-lg text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight leading-none">
+                                Start by creating <br /> your first table.
+                            </h1>
+                            <p className="text-sm md:text-base text-muted-foreground w-full max-w-lg">
+                                Define the structure of your Solana smart contract with intuitive, table-like accounts.
+                                Click below to add a table and begin building your logic visually.
+                            </p>
+                        </div>
+                        <div className="flex gap-4">
+                            <NewTable tables={tables} setCurrentTable={setCurrentTable} setTables={setTables} />
+                        </div>
                     </div>
-                </section>
-            </div>
+                ) : (
+                    <section className="flex flex-col md:flex-row gap-4 py-8">
+                        <div className="max-w-[240px] w-full p-4 grid gap-4 rounded-2xl">
+                            <div>
+                                <h1 className="text-muted-foreground text-sm font-semibold">
+                                    Tables
+                                </h1>
+                            </div>
+
+                            <div className="grid gap-2">
+                                {tables.map((table) =>
+                                    <div key={table.id} className="flex">
+                                        <Button variant={"ghost"} className={"flex-grow justify-between " + (currentTable?.id == table.id && "bg-muted")} onClick={() => setCurrentTable(table)}>
+                                            {table.name}
+                                        </Button>
+                                        <Button size={"icon"} variant={"ghost"} onClick={() => removeTable(table.id)}>
+                                            <Trash2Icon />
+                                        </Button>
+                                    </div>
+                                )}
+                                <div className="flex justify-start">
+                                    <NewTable tables={tables} setCurrentTable={setCurrentTable} setTables={setTables} />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+
+                        </div>
+                    </section>
+                )}
+            </section>
         </main>
     )
 }
+
+// <main className="w-full h-screen flex flex-col">
+//     <Header />
+//     <div className="grid w-full h-full">
+//         <section className="w-full flex h-full">
+//             <SideBar />
+//             <div className="w-full h-full space-y-4 p-4">
+//                 <section className="max-w-7xl w-full justify-self-center">
+//                     <ProjectName projectName={projectName} setProjectName={setProjectName} />
+//                 </section>
+
+
+//                 <div>
+//                     <div>
+//                         <h1>
+//                             Start By Creating Table
+//                         </h1>
+//                     </div>
+//                 </div>
+//             </div>
+//         </section>
+//     </div>
+// </main>
