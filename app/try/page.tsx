@@ -123,7 +123,7 @@ export default function Try() {
 
 
     function removeTable(id: string) {
-        const filteredTables = tables.filter((t) => t.id == id);
+        const filteredTables = tables.filter((t) => t.id !== id);
         setTables([...filteredTables]);
     }
 
