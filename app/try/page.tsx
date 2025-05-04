@@ -14,7 +14,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import { MousePointerClick, Sidebar, Zap } from "lucide-react"
+import { Pencil, Sidebar, Table2, Zap } from "lucide-react"
 import Link from "next/link"
 import { Dispatch, SetStateAction, useState } from "react";
 
@@ -25,7 +25,7 @@ function ProjectName({projectName, setProjectName}:{projectName: string, setProj
     return(
         <Dialog defaultOpen={true}>
             <DialogTrigger asChild>
-                <Button variant="outline">{projectName} <span><MousePointerClick /></span></Button>
+                <Button variant="outline">{projectName} <span><Pencil /></span></Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
@@ -80,22 +80,26 @@ function Header() {
 
 function SideBar() {
     return (
-        <div className="p-2 md:p-4 border-r border-dashed flex flex-col gap-8">
+        <div className="p-2 md:p-4 border-r border-dashed flex flex-col gap-12">
             <div>
                 <Button size={"icon"} className="cursor-pointer" variant={"ghost"}>
                     <Sidebar />
                 </Button>
             </div>
 
-            <div className="grid gap-2">
+            <div className="grid gap-4">
                 <NewTable />
+
+                <Button variant={"ghost"} size={"icon"}>
+                    <Table2 />
+                </Button>
             </div>
         </div>
     )
 }
 
 export default function Try() {
-    const [projectName, setProjectName] = useState("");
+    const [projectName, setProjectName] = useState("MyVyntrixProject");
 
     return (
         <main className="w-full h-screen flex flex-col">

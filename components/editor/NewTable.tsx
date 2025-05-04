@@ -32,6 +32,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Plus } from "lucide-react";
+import { Switch } from "../ui/switch";
 
 
 function SelectType() {
@@ -122,6 +123,21 @@ export function NewTable() {
                                 Description
                             </Label>
                             <Textarea id="desc" placeholder="Enter Table Description" />
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-4 mt-4">
+                            <div className="flex items-center space-x-2">
+                                <Label htmlFor="editable">
+                                    Editable
+                                </Label>
+                                <Switch id="editable" />
+                            </div>
+                            <div className="flex items-center space-x-2">
+                                <Label htmlFor="deletable">
+                                    Deletable
+                                </Label>
+                                <Switch id="deletable" />
+                            </div>
                         </div>
                     </div>
 
