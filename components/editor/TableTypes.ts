@@ -1,4 +1,4 @@
-export type FieldType = "pubkey" | "u8" | "u16" | "u32" | "u64" | "i8" | "i16" | "i32" | "i64" | "string" | "bool"
+export type FieldType = "Pubkey" | "u8" | "u16" | "u32" | "u64" | "i8" | "i16" | "i32" | "i64" | "string" | "bool"
 
 export interface Field {
   id: string

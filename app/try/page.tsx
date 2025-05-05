@@ -18,6 +18,18 @@ import { Pencil, Trash2Icon, Zap } from "lucide-react"
 import Link from "next/link"
 import { Dispatch, SetStateAction, useState } from "react";
 import { ITable } from "@/components/editor/TableTypes";
+import { toast } from "sonner";
+import {
+    Drawer,
+    DrawerClose,
+    DrawerContent,
+    DrawerDescription,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerTrigger,
+} from "@/components/ui/drawer"
+
 
 
 function ProjectName({ projectName, setProjectName }: { projectName: string, setProjectName: Dispatch<SetStateAction<string>>; }) {
@@ -52,7 +64,7 @@ function ProjectName({ projectName, setProjectName }: { projectName: string, set
 }
 
 
-function Header() {
+function Header({ generatedCode, generateCode }: { generatedCode: string, generateCode: () => void }) {
     return (
         <header className="py-4 px-4 md:px-6 border-b flex justify-between w-full items-center">
             <div>
@@ -63,10 +75,41 @@ function Header() {
                 </Link>
             </div>
             <div className="flex gap-2 items-center">
-                <Button className="cursor-pointer">
-                    Generate Code
-                    <Zap fill="currentColor" />
-                </Button>
+                <Drawer>
+                    <DrawerTrigger asChild>
+                        <Button className="cursor-pointer" onClick={generateCode}>
+                            Generate Code
+                            <Zap fill="currentColor" />
+                        </Button>
+                    </DrawerTrigger>
+                    <DrawerContent>
+                        <div className="mx-auto w-full max-w-5xl">
+                            <DrawerHeader>
+                                <DrawerTitle>Generated Rust Code</DrawerTitle>
+                                <DrawerDescription>Anchor-based Rust code for your Solana smart contract</DrawerDescription>
+                            </DrawerHeader>
+
+
+                            <pre className="bg-neutral-900 text-neutral-50 p-4 rounded-md overflow-auto max-h-[40vh]">
+                                <code>
+                                    {generatedCode || "// Generate code by creating tables and fields, then click 'Generate Code'"}
+                                </code>
+                            </pre>
+
+
+                            <DrawerFooter className="max-w-lg w-full flex flex-grow flex-row">
+                                <Button onClick={() => {
+                                    navigator.clipboard.writeText(generatedCode);
+                                    toast.success("Code Copied!")
+                                }}>Copy Code</Button>
+                                <DrawerClose className="grid">
+                                    <Button variant="outline">Close</Button>
+                                </DrawerClose>
+                            </DrawerFooter>
+                        </div>
+                    </DrawerContent>
+                </Drawer>
+
                 <ModeToggle />
             </div>
         </header>
@@ -120,16 +163,182 @@ export default function Try() {
     const [projectName, setProjectName] = useState("MyVyntrixProject");
     const [tables, setTables] = useState<ITable[]>([]);
     const [currentTable, setCurrentTable] = useState<ITable | null>(null);
-
+    const [generatedCode, setGeneratedCode] = useState("")
 
     function removeTable(id: string) {
         const filteredTables = tables.filter((t) => t.id !== id);
         setTables([...filteredTables]);
     }
 
+
+
+    const generateCode = () => {
+        if (tables.length === 0) {
+            toast.error("Please create at least one table with fields");
+            setGeneratedCode("// Please create at least one table with fields")
+            return
+        }
+
+        let code = `
+use anchor_lang::prelude::*;
+    
+declare_id!("11111111111111111111111111111111");
+    
+#[program]
+pub mod ${projectName.toLowerCase().replace(/\s+/g, "_")} {
+    use super::*;
+    
+    pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
+        Ok(())
+    }
+    `
+
+        // Add functions for each table
+        tables.forEach((table) => {
+            const snakeCaseName = table.name.toLowerCase().replace(/\s+/g, "_")
+
+            // Create function
+            code += `
+    pub fn create_${snakeCaseName}(ctx: Context<Create${table.name}>${table.fields
+                    .map((field) => {
+                        if (field.type === "string") {
+                            return `, ${field.name.toLowerCase()}: String`
+                        } else {
+                            return `, ${field.name.toLowerCase()}: ${field.type}`
+                        }
+                    })
+                    .join("")}) -> Result<()> {
+        let ${snakeCaseName} = &mut ctx.accounts.${snakeCaseName};
+    ${table.fields
+                    .map((field) => {
+                        if (field.type === "string") {
+                            return `        ${snakeCaseName}.${field.name.toLowerCase()} = ${field.name.toLowerCase()};`
+                        } else {
+                            return `        ${snakeCaseName}.${field.name.toLowerCase()} = ${field.name.toLowerCase()};`
+                        }
+                    })
+                    .join("\n")}
+    ${table.editable || table.deletable ? `        ${snakeCaseName}.authority = ctx.accounts.user.key();` : ""}
+        Ok(())
+    }
+    `
+
+            // Edit function if table is editable
+            if (table.editable) {
+                code += `
+    pub fn edit_${snakeCaseName}(ctx: Context<Edit${table.name}>${table.fields
+                        .map((field) => {
+                            if (field.type === "string") {
+                                return `, ${field.name.toLowerCase()}: String`
+                            } else {
+                                return `, ${field.name.toLowerCase()}: ${field.type}`
+                            }
+                        })
+                        .join("")}) -> Result<()> {
+        let ${snakeCaseName} = &mut ctx.accounts.${snakeCaseName};
+    ${table.fields
+                        .map((field) => {
+                            if (field.type === "string") {
+                                return `        ${snakeCaseName}.${field.name.toLowerCase()} = ${field.name.toLowerCase()};`
+                            } else {
+                                return `        ${snakeCaseName}.${field.name.toLowerCase()} = ${field.name.toLowerCase()};`
+                            }
+                        })
+                        .join("\n")}
+        Ok(())
+    }
+    `
+            }
+
+            // Delete function if table is deletable
+            if (table.deletable) {
+                code += `
+    pub fn delete_${snakeCaseName}(ctx: Context<Delete${table.name}>) -> Result<()> {
+        // The account will be closed and lamports will be returned to the authority
+        Ok(())
+    }`
+            }
+        })
+
+code += `
+}
+    
+    `
+
+        // Add account structs
+        tables.forEach((table) => {
+            const keyFields = table.fields.filter((field) => field.isKey)
+
+            // Create account struct
+            code += `
+#[derive(Accounts)]
+pub struct Create${table.name}<'info> {
+    #[account(init, payer = user, space = 8 + ${table.fields.length * 32}${table.editable || table.deletable ? " + 32" : ""})]
+    pub ${table.name.toLowerCase()}: Account<'info, ${table.name}>,
+    #[account(mut)]
+    pub user: Signer<'info>,
+    pub system_program: Program<'info, System>,
+}
+    
+    `
+
+            // Edit account struct if table is editable
+            if (table.editable) {
+                code += `
+#[derive(Accounts)]
+pub struct Edit${table.name}<'info> {
+    #[account(mut, has_one = authority)]
+    pub ${table.name.toLowerCase()}: Account<'info, ${table.name}>,
+    pub authority: Signer<'info>,
+}    
+    `
+            }
+
+            // Delete account struct if table is deletable
+            if (table.deletable) {
+                code += `
+#[derive(Accounts)]
+pub struct Delete${table.name}<'info> {
+    #[account(mut, has_one = authority, close = authority)]
+    pub ${table.name.toLowerCase()}: Account<'info, ${table.name}>,
+    #[account(mut)]
+    pub authority: Signer<'info>,
+}
+    
+    `
+}
+
+            // Account data struct
+            code += `
+#[account]
+pub struct ${table.name} {
+    ${table.fields
+                    .map((field) => {
+                        if (field.type === "string") {
+                            return `    pub ${field.name.toLowerCase()}: String,`
+                        } else {
+                            return `pub ${field.name.toLowerCase()}: ${field.type},`
+                        }
+                    })
+                    .join("\n")}
+    ${table.editable || table.deletable ? `pub authority: Pubkey,` : ""}
+}
+    
+    `
+        })
+
+        // Add Initialize struct
+        code += `
+#[derive(Accounts)]
+pub struct Initialize {}
+    `
+
+        setGeneratedCode(code);
+    }
+
     return (
         <main className="w-full h-screen">
-            <Header />
+            <Header generatedCode={generatedCode} generateCode={generateCode} />
             <section className="max-w-7xl p-4 w-full justify-self-center">
                 <div className="flex gap-4 items-center justify-end">
                     <ProjectName projectName={projectName} setProjectName={setProjectName} />

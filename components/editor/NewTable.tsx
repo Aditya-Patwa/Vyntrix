@@ -77,7 +77,7 @@ function ColumnTable({ fields, setFields }: { fields: Field[], setFields: React.
                                     <SelectValue placeholder="Select type" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem value="pubkey">PubKey</SelectItem>
+                                    <SelectItem value="Pubkey">PubKey</SelectItem>
                                     <SelectItem value="u8">u8</SelectItem>
                                     <SelectItem value="u16">u16</SelectItem>
                                     <SelectItem value="u32">u32</SelectItem>
@@ -92,7 +92,7 @@ function ColumnTable({ fields, setFields }: { fields: Field[], setFields: React.
                             </Select>
                         </TableCell>
                         <TableCell className="font-medium">
-                            <Select onValueChange={(v) => handleFieldChange(i, "type", v == "yes")}>
+                            <Select onValueChange={(v) => handleFieldChange(i, "isKey", v == "yes")}>
                                 <SelectTrigger id="key-field">
                                     <SelectValue placeholder="Is key?" />
                                 </SelectTrigger>
@@ -132,6 +132,8 @@ export function NewTable({ tables, setCurrentTable, setTables }: { tables: ITabl
     function createTable() {
         setTables([...tables, { ...tableDetails, fields: fields }]);
         setCurrentTable({...tableDetails, fields: fields});
+        setTableDetails({ id: crypto.randomUUID(), name: "", editable: true, deletable: true });
+        setFields([{ id: crypto.randomUUID(), name: "", type: null, isKey: null }]);
     }
 
 
