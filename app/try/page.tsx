@@ -267,7 +267,7 @@ code += `
 
         // Add account structs
         tables.forEach((table) => {
-            const keyFields = table.fields.filter((field) => field.isKey)
+            // const keyFields = table.fields.filter((field) => field.isKey)
 
             // Create account struct
             code += `
@@ -362,7 +362,7 @@ pub struct Initialize {}
                     </div>
                 ) : (
                     <section className="flex flex-col md:flex-row gap-4 py-8">
-                        <div className="max-w-[240px] w-full p-4 grid gap-4 rounded-2xl">
+                        <div className="max-w-sm w-full p-4 grid gap-4 rounded-2xl">
                             <div>
                                 <h1 className="text-muted-foreground text-sm font-semibold">
                                     Tables
