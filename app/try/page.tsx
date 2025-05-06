@@ -299,7 +299,7 @@ function TableDetails({ currentTable, setCurrentTable, tables, setTables }: { cu
                         </TableBody>
                         <TableFooter>
                             <TableRow>
-                                <TableCell colSpan={3}>
+                                <TableCell colSpan={4}>
                                     <Button size={"sm"} variant={"outline"} onClick={addField}>
                                         Add Field
                                     </Button>
