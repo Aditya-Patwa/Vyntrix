@@ -14,10 +14,17 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
 import { Pencil, Trash2Icon, Zap } from "lucide-react"
 import Link from "next/link"
 import { Dispatch, SetStateAction, useState } from "react";
-import { ITable } from "@/components/editor/TableTypes";
+import { FieldType, ITable } from "@/components/editor/TableTypes";
 import { toast } from "sonner";
 import {
     Drawer,
@@ -29,6 +36,8 @@ import {
     DrawerTitle,
     DrawerTrigger,
 } from "@/components/ui/drawer"
+import { Switch } from "@/components/ui/switch";
+import { Table, TableCaption, TableBody, TableHeader, TableRow, TableHead, TableCell, TableFooter } from "@/components/ui/table";
 
 
 
@@ -159,6 +168,152 @@ function Header({ generatedCode, generateCode }: { generatedCode: string, genera
 //     )
 // }
 
+
+
+function TableDetails({ currentTable, setCurrentTable, tables, setTables }: { currentTable: ITable, setCurrentTable: Dispatch<SetStateAction<ITable | null>>, tables: ITable[], setTables: Dispatch<SetStateAction<ITable[]>> }) {
+    function updateBools(key: "editable" | "deletable", value: boolean) {
+        const updatedTable = {...currentTable};
+        updatedTable[key] = value;
+        setTables(tables.map((table) => (table.id === currentTable.id ? updatedTable : table)));
+        setCurrentTable({...updatedTable});
+    }
+    
+    function removeTable() {
+        const updatedTables = tables.filter((t) => t.id !== currentTable.id);
+        setTables([...updatedTables]);
+        setCurrentTable(null);
+    }
+    
+    function addField() {
+        const updatedTable = {...currentTable, fields: [...currentTable.fields, { id: crypto.randomUUID(), name: "", type: null, isKey: null }]};
+        setTables(tables.map((table) => (table.id === currentTable.id ? updatedTable : table)));
+        setCurrentTable({...updatedTable});
+    }
+
+
+    function handleFieldChange(index: number, key: string, value: string | FieldType | boolean) {
+        const fields = [...currentTable.fields];
+        fields[index] = { ...fields[index], [key]: value };
+        const updatedTable = {...currentTable, fields: [...fields]};
+        setTables(tables.map((table) => (table.id === currentTable.id ? updatedTable : table)));
+        setCurrentTable({...updatedTable});
+    }
+
+    function removeField(id: string) {
+        const updatedFields = currentTable.fields.filter((f) => f.id !== id);
+        const updatedTable = {...currentTable, fields: [...updatedFields]};
+        setTables(tables.map((table) => (table.id === currentTable.id ? updatedTable : table)));
+        setCurrentTable({...updatedTable});
+    }
+
+
+    return (
+        <section className="w-full space-y-8">
+            <div className="grid gap-4 pb-8 border-b border-dashed">
+                <div>
+                    <h1 className="text-2xl font-semibold tracking-tight">
+                        {currentTable.name}
+                    </h1>
+                    <p className="text-muted-foreground">
+                        Add fields to define your table structure
+                    </p>
+                </div>
+
+                <div className="flex items-center gap-4 flex-wrap">
+                    <div className="flex gap-2">
+                        <Label htmlFor="editable">
+                            Editable
+                        </Label>
+                        <Switch id="editable" checked={currentTable.editable} onCheckedChange={(v) => updateBools("editable", v)} />
+                    </div>
+                    <div className="flex gap-2">
+                        <Label htmlFor="deletable">
+                            Deletable
+                        </Label>
+                        <Switch id="deletable" checked={currentTable.deletable} onCheckedChange={(v) => updateBools("deletable", v)} />
+                    </div>
+
+                    <div>
+                        <Button variant={"destructive"} className="cursor-pointer" onClick={removeTable}>
+                            <Trash2Icon />
+                            Delete
+                        </Button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                    <Table>
+                        <TableCaption>A list of your fields.</TableCaption>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead>Name</TableHead>
+                                <TableHead>Type</TableHead>
+                                <TableHead>Key Field</TableHead>
+                                <TableHead>Action</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {currentTable.fields!.map((field, i) =>
+                                <TableRow key={field.id}>
+                                    <TableCell className="font-medium">
+                                        <Input type="text" placeholder="Field Name" value={field.name} onChange={(e) => handleFieldChange(i, "name", e.target.value)} />
+                                    </TableCell>
+                                    <TableCell className="font-medium">
+                                        <Select value={field.type!} onValueChange={(v) => handleFieldChange(i, "type", v)}>
+                                            <SelectTrigger id="field-type">
+                                                <SelectValue placeholder="Select type" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectItem value="Pubkey">PubKey</SelectItem>
+                                                <SelectItem value="u8">u8</SelectItem>
+                                                <SelectItem value="u16">u16</SelectItem>
+                                                <SelectItem value="u32">u32</SelectItem>
+                                                <SelectItem value="u64">u64</SelectItem>
+                                                <SelectItem value="i8">i8</SelectItem>
+                                                <SelectItem value="i16">i16</SelectItem>
+                                                <SelectItem value="i32">i32</SelectItem>
+                                                <SelectItem value="i64">i64</SelectItem>
+                                                <SelectItem value="string">String</SelectItem>
+                                                <SelectItem value="bool">Boolean</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+                                    </TableCell>
+                                    <TableCell className="font-medium">
+                                        <Select value={field.isKey ? "yes": "no"} onValueChange={(v) => handleFieldChange(i, "isKey", v == "yes")}>
+                                            <SelectTrigger id="key-field">
+                                                <SelectValue placeholder="Is key?" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectItem value="yes">Yes</SelectItem>
+                                                <SelectItem value="no">No</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Button size={"icon"} variant={"link"} onClick={() => removeField(field.id)}>
+                                            <Trash2Icon className="text-rose-500" />
+                                        </Button>
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                        </TableBody>
+                        <TableFooter>
+                            <TableRow>
+                                <TableCell colSpan={3}>
+                                    <Button size={"sm"} variant={"outline"} onClick={addField}>
+                                        Add Field
+                                    </Button>
+                                </TableCell>
+                            </TableRow>
+                        </TableFooter>
+                    </Table>
+                </div>
+        </section>
+    )
+}
+
+
+
 export default function Try() {
     const [projectName, setProjectName] = useState("MyVyntrixProject");
     const [tables, setTables] = useState<ITable[]>([]);
@@ -260,7 +415,7 @@ pub mod ${projectName.toLowerCase().replace(/\s+/g, "_")} {
             }
         })
 
-code += `
+        code += `
 }
     
     `
@@ -306,7 +461,7 @@ pub struct Delete${table.name}<'info> {
 }
     
     `
-}
+            }
 
             // Account data struct
             code += `
@@ -337,7 +492,7 @@ pub struct Initialize {}
     }
 
     return (
-        <main className="w-full h-screen">
+        <main className="w-full min-h-screen">
             <Header generatedCode={generatedCode} generateCode={generateCode} />
             <section className="max-w-7xl p-4 w-full justify-self-center">
                 <div className="flex gap-4 items-center justify-end">
@@ -362,7 +517,7 @@ pub struct Initialize {}
                     </div>
                 ) : (
                     <section className="flex flex-col md:flex-row gap-4 py-8">
-                        <div className="max-w-sm w-full p-4 grid gap-4 rounded-2xl">
+                        <div className="max-w-sm sm:max-w-xs lg:max-w-sm w-full p-4 space-y-4 rounded-2xl">
                             <div>
                                 <h1 className="text-muted-foreground text-sm font-semibold">
                                     Tables
@@ -380,15 +535,13 @@ pub struct Initialize {}
                                         </Button>
                                     </div>
                                 )}
-                                <div className="flex justify-start">
+                                <div className="flex justify-start mt-2">
                                     <NewTable tables={tables} setCurrentTable={setCurrentTable} setTables={setTables} />
                                 </div>
                             </div>
                         </div>
 
-                        <div>
-
-                        </div>
+                        {currentTable && <TableDetails key={currentTable.id} currentTable={currentTable} setCurrentTable={setCurrentTable} tables={tables} setTables={setTables} />}
                     </section>
                 )}
             </section>
