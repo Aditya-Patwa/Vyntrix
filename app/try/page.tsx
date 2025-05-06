@@ -541,7 +541,18 @@ pub struct Initialize {}
                             </div>
                         </div>
 
-                        {currentTable && <TableDetails key={currentTable.id} currentTable={currentTable} setCurrentTable={setCurrentTable} tables={tables} setTables={setTables} />}
+                        {currentTable ? <TableDetails key={currentTable.id} currentTable={currentTable} setCurrentTable={setCurrentTable} tables={tables} setTables={setTables} /> : (
+                            <div className="py-4">
+                                <div className="grid gap-2">
+                                    <h1 className="text-3xl font-semibold tracking-tight leading-none">
+                                        Select Table to view details
+                                    </h1>
+                                    <p className="text-muted-foreground">
+                                        Select any table to view and manage details.
+                                    </p>
+                                </div>
+                            </div>
+                        )}
                     </section>
                 )}
             </section>
