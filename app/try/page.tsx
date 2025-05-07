@@ -21,7 +21,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import { Pencil, Trash2Icon, Zap } from "lucide-react"
+import { Pencil, PencilIcon, Trash2Icon, Zap } from "lucide-react"
 import Link from "next/link"
 import { Dispatch, SetStateAction, useState } from "react";
 import { FieldType, ITable } from "@/components/editor/TableTypes";
@@ -171,39 +171,47 @@ function Header({ generatedCode, generateCode }: { generatedCode: string, genera
 
 
 function TableDetails({ currentTable, setCurrentTable, tables, setTables }: { currentTable: ITable, setCurrentTable: Dispatch<SetStateAction<ITable | null>>, tables: ITable[], setTables: Dispatch<SetStateAction<ITable[]>> }) {
+    const [isEditName, setIsEditName] = useState(false);
+
     function updateBools(key: "editable" | "deletable", value: boolean) {
-        const updatedTable = {...currentTable};
+        const updatedTable = { ...currentTable };
         updatedTable[key] = value;
         setTables(tables.map((table) => (table.id === currentTable.id ? updatedTable : table)));
-        setCurrentTable({...updatedTable});
+        setCurrentTable({ ...updatedTable });
     }
-    
+
     function removeTable() {
         const updatedTables = tables.filter((t) => t.id !== currentTable.id);
         setTables([...updatedTables]);
         setCurrentTable(null);
     }
-    
+
     function addField() {
-        const updatedTable = {...currentTable, fields: [...currentTable.fields, { id: crypto.randomUUID(), name: "", type: null, isKey: null }]};
+        const updatedTable = { ...currentTable, fields: [...currentTable.fields, { id: crypto.randomUUID(), name: "", type: null, isKey: null }] };
         setTables(tables.map((table) => (table.id === currentTable.id ? updatedTable : table)));
-        setCurrentTable({...updatedTable});
+        setCurrentTable({ ...updatedTable });
     }
 
 
     function handleFieldChange(index: number, key: string, value: string | FieldType | boolean) {
         const fields = [...currentTable.fields];
         fields[index] = { ...fields[index], [key]: value };
-        const updatedTable = {...currentTable, fields: [...fields]};
+        const updatedTable = { ...currentTable, fields: [...fields] };
         setTables(tables.map((table) => (table.id === currentTable.id ? updatedTable : table)));
-        setCurrentTable({...updatedTable});
+        setCurrentTable({ ...updatedTable });
     }
 
     function removeField(id: string) {
         const updatedFields = currentTable.fields.filter((f) => f.id !== id);
-        const updatedTable = {...currentTable, fields: [...updatedFields]};
+        const updatedTable = { ...currentTable, fields: [...updatedFields] };
         setTables(tables.map((table) => (table.id === currentTable.id ? updatedTable : table)));
-        setCurrentTable({...updatedTable});
+        setCurrentTable({ ...updatedTable });
+    }
+
+    function handleNameChange(e: React.ChangeEvent<HTMLInputElement>) {
+        const updatedTable = { ...currentTable, name: e.target.value };
+        setTables(tables.map((table) => (table.id === currentTable.id ? updatedTable : table)));
+        setCurrentTable({ ...updatedTable });
     }
 
 
@@ -211,10 +219,20 @@ function TableDetails({ currentTable, setCurrentTable, tables, setTables }: { cu
         <section className="w-full space-y-8">
             <div className="grid gap-4 pb-8 border-b border-dashed">
                 <div>
-                    <h1 className="text-2xl font-semibold tracking-tight">
-                        {currentTable.name}
-                    </h1>
-                    <p className="text-muted-foreground">
+                    {isEditName ? (
+                        <div className="flex gap-2 items-center">
+                            <Input type="text" value={currentTable.name} onChange={handleNameChange} className="max-w-[160px]" />
+                            <Button onClick={() => setIsEditName(!isEditName)}>
+                                Save
+                            </Button>
+                        </div>
+                    ) : (
+                        <Button className="text-2xl font-semibold tracking-tight" variant={"link"} onClick={() => setIsEditName(!isEditName)}>
+                            {currentTable.name}
+                            <PencilIcon />
+                        </Button>
+                    )}
+                    <p className="text-muted-foreground mt-2">
                         Add fields to define your table structure
                     </p>
                 </div>
@@ -242,73 +260,73 @@ function TableDetails({ currentTable, setCurrentTable, tables, setTables }: { cu
                 </div>
             </div>
             <div>
-                    <Table>
-                        <TableCaption>A list of your fields.</TableCaption>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead>Name</TableHead>
-                                <TableHead>Type</TableHead>
-                                <TableHead>Key Field</TableHead>
-                                <TableHead>Action</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {currentTable.fields!.map((field, i) =>
-                                <TableRow key={field.id}>
-                                    <TableCell className="font-medium">
-                                        <Input type="text" placeholder="Field Name" value={field.name} onChange={(e) => handleFieldChange(i, "name", e.target.value)} />
-                                    </TableCell>
-                                    <TableCell className="font-medium">
-                                        <Select value={field.type!} onValueChange={(v) => handleFieldChange(i, "type", v)}>
-                                            <SelectTrigger id="field-type">
-                                                <SelectValue placeholder="Select type" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="Pubkey">PubKey</SelectItem>
-                                                <SelectItem value="u8">u8</SelectItem>
-                                                <SelectItem value="u16">u16</SelectItem>
-                                                <SelectItem value="u32">u32</SelectItem>
-                                                <SelectItem value="u64">u64</SelectItem>
-                                                <SelectItem value="i8">i8</SelectItem>
-                                                <SelectItem value="i16">i16</SelectItem>
-                                                <SelectItem value="i32">i32</SelectItem>
-                                                <SelectItem value="i64">i64</SelectItem>
-                                                <SelectItem value="string">String</SelectItem>
-                                                <SelectItem value="bool">Boolean</SelectItem>
-                                            </SelectContent>
-                                        </Select>
-                                    </TableCell>
-                                    <TableCell className="font-medium">
-                                        <Select value={field.isKey ? "yes": "no"} onValueChange={(v) => handleFieldChange(i, "isKey", v == "yes")}>
-                                            <SelectTrigger id="key-field">
-                                                <SelectValue placeholder="Is key?" />
-                                            </SelectTrigger>
-                                            <SelectContent>
-                                                <SelectItem value="yes">Yes</SelectItem>
-                                                <SelectItem value="no">No</SelectItem>
-                                            </SelectContent>
-                                        </Select>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Button size={"icon"} variant={"link"} onClick={() => removeField(field.id)}>
-                                            <Trash2Icon className="text-rose-500" />
-                                        </Button>
-                                    </TableCell>
-                                </TableRow>
-                            )}
-                        </TableBody>
-                        <TableFooter>
-                            <TableRow>
-                                <TableCell colSpan={4}>
-                                    <Button size={"sm"} variant={"outline"} onClick={addField}>
-                                        Add Field
+                <Table>
+                    <TableCaption>A list of your fields.</TableCaption>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead>Name</TableHead>
+                            <TableHead>Type</TableHead>
+                            <TableHead>Key Field</TableHead>
+                            <TableHead>Action</TableHead>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {currentTable.fields!.map((field, i) =>
+                            <TableRow key={field.id}>
+                                <TableCell className="font-medium">
+                                    <Input type="text" placeholder="Field Name" value={field.name} onChange={(e) => handleFieldChange(i, "name", e.target.value)} />
+                                </TableCell>
+                                <TableCell className="font-medium">
+                                    <Select value={field.type!} onValueChange={(v) => handleFieldChange(i, "type", v)}>
+                                        <SelectTrigger id="field-type">
+                                            <SelectValue placeholder="Select type" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="Pubkey">PubKey</SelectItem>
+                                            <SelectItem value="u8">u8</SelectItem>
+                                            <SelectItem value="u16">u16</SelectItem>
+                                            <SelectItem value="u32">u32</SelectItem>
+                                            <SelectItem value="u64">u64</SelectItem>
+                                            <SelectItem value="i8">i8</SelectItem>
+                                            <SelectItem value="i16">i16</SelectItem>
+                                            <SelectItem value="i32">i32</SelectItem>
+                                            <SelectItem value="i64">i64</SelectItem>
+                                            <SelectItem value="string">String</SelectItem>
+                                            <SelectItem value="bool">Boolean</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </TableCell>
+                                <TableCell className="font-medium">
+                                    <Select value={field.isKey ? "yes" : "no"} onValueChange={(v) => handleFieldChange(i, "isKey", v == "yes")}>
+                                        <SelectTrigger id="key-field">
+                                            <SelectValue placeholder="Is key?" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem value="yes">Yes</SelectItem>
+                                            <SelectItem value="no">No</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </TableCell>
+                                <TableCell>
+                                    <Button size={"icon"} variant={"link"} onClick={() => removeField(field.id)}>
+                                        <Trash2Icon className="text-rose-500" />
                                     </Button>
                                 </TableCell>
                             </TableRow>
-                        </TableFooter>
-                    </Table>
-                </div>
-        </section>
+                        )}
+                    </TableBody>
+                    <TableFooter>
+                        <TableRow>
+                            <TableCell colSpan={4}>
+                                <Button size={"sm"} variant={"outline"} onClick={addField}>
+                                    Add Field
+                                </Button>
+                            </TableCell>
+                        </TableRow>
+                    </TableFooter>
+                </Table>
+            </div>
+        </section >
     )
 }
 
