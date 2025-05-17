@@ -26,7 +26,7 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-3 text-muted-foreground">Support</h3>
             <ul className="space-y-2 text-sm">
               <li><a href="/contact" className="hover:underline">Contact Us</a></li>
-              <li><a href="/faq" className="hover:underline">FAQs</a></li>
+              <li><a href="/#faq" className="hover:underline">FAQs</a></li>
               <li><a href="mailto:vyntrixhq@gmail.com" className="hover:underline">Help Center</a></li>
             </ul>
           </div>

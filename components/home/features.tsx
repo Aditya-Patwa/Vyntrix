@@ -1,5 +1,6 @@
 import { CloudUpload, LayoutDashboard, MousePointerClick, Table2, Wallet } from "lucide-react";
 import { Badge } from "../ui/badge";
+import Image from "next/image";
 
 
 export default function Features() {
@@ -31,13 +32,15 @@ export default function Features() {
                             Your designs turn into clean <span className="text-muted-foreground">modular Rust-based smart contracts.</span>
                         </h1>
                     </div>
-                    <div className="p-4 md:p-8 md:col-span-2 space-y-4">
-                        <Badge variant={"secondary"}>
-                            <CloudUpload /> Solana-Ready in Seconds
-                        </Badge>
-                        <h1 className="text-2xl md:text-2xl lg:text-3xl max-w-lg font-medium tracking-tight">
-                            Deploy smart contracts directly, <span className="text-muted-foreground">to devnet or mainnet from the platform.</span>
-                        </h1>
+                    <div className="p-4 md:p-8 space-y-4 md:col-span-2">
+                        {/* <div className="space-y-4"> */}
+                            <Badge variant={"secondary"}>
+                                <CloudUpload /> Solana-Ready in Seconds
+                            </Badge>
+                            <h1 className="text-2xl md:text-2xl lg:text-3xl max-w-lg font-medium tracking-tight">
+                                Deploy smart contracts directly, <span className="text-muted-foreground">to devnet or mainnet from the platform.</span>
+                            </h1>
+                        {/* </div> */}
                     </div>
                     <div className="px-4 py-8 md:p-8 space-y-4">
                         <Badge variant={"secondary"}>

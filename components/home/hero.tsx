@@ -27,7 +27,7 @@ export default function Hero() {
                                 </span>
                             </Button>
                         </Link>
-                        <Link href={"/#features"}>
+                        <Link href={"/#cta"}>
                             <Button variant={"link"} className="group cursor-pointer">
                                 Join Waitlist
                                 <ChevronRight className="group-hover:translate-x-1 transition-ease duration-100" />
