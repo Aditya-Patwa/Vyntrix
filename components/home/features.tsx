@@ -1,6 +1,5 @@
 import { CloudUpload, LayoutDashboard, MousePointerClick, Table2, Wallet } from "lucide-react";
 import { Badge } from "../ui/badge";
-import Image from "next/image";
 
 
 export default function Features() {
