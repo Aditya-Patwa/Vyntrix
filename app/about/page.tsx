@@ -68,7 +68,7 @@ export default function About() {
                             Inspired by the simplicity of tools like Supabase for backend dev, we asked ourselves:
                         </p>
                         <div className={"border-l-4 border-primary pl-4 py-2 text-sm sm:text-base " + geistMono.className}>
-                            "Why can&apos;t Solana dev feel the same?"
+                            &quot;Why can&apos;t Solana dev feel the same?&quot;
                         </div>
                         <p className="text-muted-foreground text-sm sm:text-base">
                             That&apos;s when Vyntrix was born — a unified no-code platform to handle everything from smart contract creation to deployment, management, token/NFT issuance, and beyond.
@@ -187,7 +187,7 @@ export default function About() {
                         </h1>
                         <p className="text-muted-foreground text-sm sm:text-base">
                             Vyntrix is built by indie hackers and Web3 devs who&apos;ve been in your shoes. <br />
-                            We're building tools we wished existed — now we're making them real, for you.
+                            We&apos;re building tools we wished existed — now we&apos;re making them real, for you.
                         </p>
                     </div>
                 </div>
