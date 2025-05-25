@@ -1,5 +1,6 @@
 import { Mail } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -17,17 +18,17 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-3 text-muted-foreground">Company</h3>
             <ul className="space-y-2 text-sm">
 
-              <li><a href="/about" className="hover:underline">About Us</a></li>
-              <li><a href="/privacypolicy" className="hover:underline">Privacy Policy</a></li>
+              <li><Link href="/about" className="hover:underline">About Us</Link></li>
+              <li><Link href="/privacypolicy" className="hover:underline">Privacy Policy</Link></li>
             </ul>
           </div>
 
           <div>
             <h3 className="text-lg font-semibold mb-3 text-muted-foreground">Support</h3>
             <ul className="space-y-2 text-sm">
-              <li><a href="/contact" className="hover:underline">Contact Us</a></li>
-              <li><a href="/#faq" className="hover:underline">FAQs</a></li>
-              <li><a href="mailto:vyntrixhq@gmail.com" className="hover:underline">Help Center</a></li>
+              <li><Link href="/contact" className="hover:underline">Contact Us</Link></li>
+              <li><Link href="/#faq" className="hover:underline">FAQs</Link></li>
+              <li><Link href="mailto:vyntrixhq@gmail.com" className="hover:underline">Help Center</Link></li>
             </ul>
           </div>
         </div>
@@ -35,13 +36,13 @@ export default function Footer() {
         {/* <div className="md:w-1/3">
           <h3 className="text-lg font-semibold mb-3">Follow Us</h3>
           <div className="flex space-x-4">
-            <a href="mailto:vyntrixhq@gmail.com" aria-label="Email"><Mail /></a>
-            <a href="https://discord.gg/gsaApAQR" aria-label="Discord">
+            <Link href="mailto:vyntrixhq@gmail.com" aria-label="Email"><Mail /></Link>
+            <Link href="https://discord.gg/gsaApAQR" aria-label="Discord">
               <Image src={"/Discord-Symbol-White.png"} alt="Discord" width={24} height={24} />
-            </a>
-            <a href="https://x.com/VyntrixHQ" aria-label="Twitter">
+            </Link>
+            <Link href="https://x.com/VyntrixHQ" aria-label="Twitter">
               <Image src={"/x-logo.png"} alt="Discord" width={24} height={24} />
-            </a>
+            </Link>
           </div>
         </div> */}
       </div>
@@ -54,13 +55,13 @@ export default function Footer() {
         <div className="flex gap-6">
           <h3 className="hidden sm:grid text-lg font-semibold">Follow Us</h3>
           <div className="flex space-x-4 items-center">
-            <a href="mailto:vyntrixhq@gmail.com" aria-label="Email"><Mail /></a>
-            <a href="https://discord.gg/gsaApAQR" aria-label="Discord">
+            <Link href="mailto:vyntrixhq@gmail.com" aria-label="Email"><Mail /></Link>
+            <Link href="https://discord.gg/gsaApAQR" aria-label="Discord">
               <Image src={"/Discord-Symbol-White.png"} alt="Discord" width={24} height={24} className="invert dark:invert-0" />
-            </a>
-            <a href="https://x.com/VyntrixHQ" aria-label="Twitter">
+            </Link>
+            <Link href="https://x.com/VyntrixHQ" aria-label="Twitter">
               <Image src={"/x-logo.png"} alt="Discord" width={20} height={20} className="invert dark:invert-0" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>
