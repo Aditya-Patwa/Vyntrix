@@ -28,9 +28,9 @@ export default function Accordion(props: Props) {
       >
         <span>{props.question}</span>
         {isAccordionOpen ? (
-          <Minus />
+          <Minus className="shrink-0" />
         ) : (
-          <Plus />
+          <Plus className="shrink-0" />
         )}
       </p>
       {/* Answer */}
