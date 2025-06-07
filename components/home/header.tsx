@@ -37,14 +37,14 @@ export default function Header() {
             </div>
 
             <div className="flex gap-1">
-                {/* <Link href={"/ai"} className="md:hidden">
+                <Link href={"/ai"} className="md:hidden">
                     <Button variant={"ghost"} className="cursor-pointer">
                         VyntrixAI
                     </Button>
-                </Link> */}
-                <Link href={"/ai"}>
+                </Link>
+                <Link href={"/#cta"} className="hidden md:grid">
                     <Button variant={"secondary"} className="cursor-pointer">
-                        VyntrixAI
+                        Join Waitlist
                     </Button>
                 </Link>
                 <ModeToggle />
