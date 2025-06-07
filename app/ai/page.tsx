@@ -97,11 +97,13 @@ export default function ChatInteface() {
                                             switch (part.type) {
                                                 case 'text':
                                                     return <ReactMarkdown
+                                                        key={i}
                                                         children={part.text}
                                                         components={{
-                                                            code({ node, className, children, ...props }) {
+                                                            code({ className, children, ...props }) {
                                                                 const match = /language-(\w+)/.exec(className || '');
                                                                 // 'inline' is a prop, not a direct parameter
+                                                                // @typescript-eslint/no-explicit-any
                                                                 const isInline = (props as any).inline;
                                                                 return !isInline && match ? (
                                                                     <SyntaxHighlighter
