@@ -98,16 +98,15 @@ export default function ChatInteface() {
                                                 case 'text':
                                                     return <ReactMarkdown
                                                         key={i}
-                                                        children={part.text}
                                                         components={{
                                                             code({ className, children, ...props }) {
                                                                 const match = /language-(\w+)/.exec(className || '');
                                                                 // 'inline' is a prop, not a direct parameter
-                                                                // @ts-expect-error
+                                                                // @ts-expect-error forIgnoringInlineError
                                                                 const isInline = (props).inline;
                                                                 return !isInline && match ? (
                                                                     <SyntaxHighlighter
-                                                                        // @ts-expect-error
+                                                                        // @ts-expect-error forIgnoringError
                                                                         style={dracula}
                                                                         language={match[1]}
                                                                         PreTag="div"
@@ -122,7 +121,7 @@ export default function ChatInteface() {
                                                                 );
                                                             },
                                                         }}
-                                                    />
+                                                    >{part.text}</ReactMarkdown>
                                             }
                                         })}
                                     </p>
