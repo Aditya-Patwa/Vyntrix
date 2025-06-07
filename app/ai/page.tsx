@@ -115,7 +115,7 @@ export default function ChatInteface() {
                                                                         {String(children).replace(/\n$/, '')}
                                                                     </SyntaxHighlighter>
                                                                 ) : (
-                                                                    <code className="bg-gray-200 px-1 py-0.5 rounded text-sm" {...props}>
+                                                                    <code className="bg-neutral-200 text-neutral-900 px-1 py-0.5 rounded text-sm" {...props}>
                                                                         {children}
                                                                     </code>
                                                                 );
