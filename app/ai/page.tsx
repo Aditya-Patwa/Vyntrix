@@ -100,13 +100,15 @@ export default function ChatInteface() {
                                                         key={i}
                                                         children={part.text}
                                                         components={{
+                                                            // @ts-ignore
                                                             code({ className, children, ...props }) {
                                                                 const match = /language-(\w+)/.exec(className || '');
                                                                 // 'inline' is a prop, not a direct parameter
-                                                                // @typescript-eslint/no-explicit-any
-                                                                const isInline = (props as any).inline;
+                                                                // @ts-ignore
+                                                                const isInline = (props).inline;
                                                                 return !isInline && match ? (
                                                                     <SyntaxHighlighter
+                                                                        // @ts-ignore
                                                                         style={dracula}
                                                                         language={match[1]}
                                                                         PreTag="div"
